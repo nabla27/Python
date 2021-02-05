@@ -202,6 +202,26 @@ number_one, number_two = [5, 10]
 #全要素を取りだす。リストのコピー。
 copy_of_x = x[:]
 
+"""
+Cでは配列がpythonでのリストの役割を果たす。一つの配列に複数の型の変数を格納できない。
+必ず配列は宣言または初期化をし、型名も記す。
+int test_score[5];
+test_score[0] = 60; test_score[1] = 70; test_score[3] = 80; test_score[4] = 90; test_score[5] = 100;
+test_score[] = {60, 70, 80, 90, 100};
 
+配列の要素を取り出す。
+first_score = test_score[0];
+third_score = test_score[3];
+
+容易に特定の要素のみを取りだしたり、削除する機能(関数)はない。また、配列の要素数を取得するものもない。(ひと手間必要)
+#include <iostream>
+int test = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+
+int main(){
+	for(int i = 0; i++; sizeof(test)){
+		
+
+
+"""
 
 
