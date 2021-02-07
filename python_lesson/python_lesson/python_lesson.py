@@ -18,6 +18,8 @@ from collections import defaultdict, Counter
 
 #モジュールの関数を使うときは、関数の前に"モジュール名."をつける
 
+<details>
+<summary>test</summary>
 """
 ヘッダーファイルのインクルード。
 #include <iostream>
@@ -25,6 +27,7 @@ from collections import defaultdict, Counter
 スコープ解決演算子を用いる名前空間名の省略
 using namespace std;							
 """
+</details>
 
 ###############################################
 #関数の定義
