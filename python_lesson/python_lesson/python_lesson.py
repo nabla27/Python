@@ -34,7 +34,7 @@ using namespace std;
 def double(x):	
 	return x * 2
 
-#関数fを変数とする関数apply
+#関数fを引数とする関数apply
 def apply(f):
 	f(1)
 	
@@ -84,8 +84,10 @@ print(x)
 """
 #include <iostream>
 using namespace std;
-int x = 3;
-cout << x << "\n";
+int main(){
+	int x = 3;
+	cout << x << "\n";
+}
 """
 
 #文字列の変数
@@ -196,7 +198,7 @@ y[2::2] = [20, 40, 60, 80, 100, 120, 140, 160, 180, 200]
 print(1 in x)
 print(100 in x)
 
-#同時にリストから要素をとりだす
+#リスト展開を使い、同時に指定
 number_one, number_two = [5, 10]
 
 #全要素を取りだす。リストのコピー。
@@ -213,15 +215,79 @@ test_score[] = {60, 70, 80, 90, 100};
 first_score = test_score[0];
 third_score = test_score[3];
 
-容易に特定の要素のみを取りだしたり、削除する機能(関数)はない。また、配列の要素数を取得するものもない。(ひと手間必要)
+Cには容易に特定の範囲のみを取りだしたり、削除する機能はない。また、配列の要素数を取得するものもない。(ひと手間必要)
+C言語では配列を戻り値にすることができない。
+pythonは参照渡しだが、Cでは値渡しなので、直接アドレスを操作してポインタを用いる必要がある。
+
+以下、与えられたint型配列を逆順にソートするプログラム例。
+int test[] = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+void array_return(int* list, int range) {
+	for (int i = 0; i < range / 2; i++) {
+		int tmp = list[i];
+		list[i] = list[range - i - 1];
+		list[range - i - 1] = tmp;
+	}
+}
+int main() {
+	array_return(test, sizeof(test) / sizeof(test[0])); //二つ目の引数は配列の大きさを渡す
+	return 0;
+}
+
+普通には配列の要素数を変更することができない。stdlibをインクルードし、malloc関数でメモリの動的確保を行う。
+以下、配列から特定の要素を取り出した新たな配列を作るプログラム例(改良の余地あり)。
+#include <stdlib.h>
 #include <iostream>
-int test = {10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
+int test[] = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+int* new_array;
+void array_cut(int* list, int start=0, int end = 0, int stride=1) {
+	if (end == 0) {
+		end = start;                                              //もしendが指定されなかったら1要素だけ切り出す
+	}
+	int new_range = (end - start + 1) / stride; 　　　　　　　　　//新しい配列の要素数
+	new_array = (int *)malloc(sizeof(int) * new_range);　　　　　 //新しい配列のメモリー領域
+	for (int i = 0; i < new_range; i++) {
+		new_array[i] = list[start + stride * i];
+		std::cout << new_array[i] << "\n";
+	}
+}
+int main() {
+	array_cut(test,0,9,2); 　//0~9までを歩幅2で取り出す。(10,30,50,70,90)
+	array_cut(test, 2, 5); 　//2~5までを歩幅1で取り出す。(30,40,50,60)
+	array_cut(test, 6);　　　// 6のみを取り出す。(70)
 
-int main(){
-	for(int i = 0; i++; sizeof(test)){
-		
+	free(new_array);         //メモリの解放
+	return 0;
+}
+一回だけ行うならば、関数化せず、定数型でnew_arrayの要素数を定義すれば楽である。
 
+配列の中に、指定した数が含まれているか判定する簡単な機能はない。例えば次のようなプログラムで判定できる。
+#include <iostream>
+int test[] = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+bool judge(int* Array, int value, int size) {
+	int test = 1;
+	for (int i = 0; i < size; i++) {
+		if (Array[i] == value) { test *= 0; }
+		else { test *= 1; }
+	}
+	if (test == 0) { return true; }
+	else { return false; }
+}
+int main() {
+	std::cout << judge(test, 10, 10) << '\n'; //True
+	std::cout << judge(test, 15, 10) << '\n'; //False
+	std::cout << judge(test, 20, sizeof(test) / sizeof(test[0])) << 'n'; //True
+	return 0;
+}
 
+配列のコピーについても、pythonのように一度に配列をコピーすることはできない。forループなどで各要素を一つずつコピーしなければならない。
+int test[10] = { 10, 20, 30, 40, 50, 60, 70, 80, 90, 100 };
+int main() {
+	const int size = sizeof(test) / sizeof(test[0]);
+	int cp_test[size];
+	for (int i = 0; i < size; i++) {
+		cp_test[i] = test[i];
+	}
+}
 """
 
 
