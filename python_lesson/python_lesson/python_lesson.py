@@ -112,6 +112,10 @@ name1_AB = string_A + " " + string_B
 name2_AB = "{0} {1}".format(string_A, string_B)
 name3_AB = f"{string_A} {string_B}"
 
+#文字列のアンパック。(シーケンス型はアンパック可能)
+a,b,c = 'str'
+print(a)	#a = s
+
 """
 C言語では文字列を記憶できる型はない。一つの変数につき一文字(1byte)。
 文字列は配列を用いて扱う。文字列は" "で囲み、文字は' 'で囲む。
@@ -159,7 +163,7 @@ some_list = ["string", 0.1, True]
 list_length = len(intger_list)
 list_sum = sum(intger_list)
 
-#リストの要素をインデックスを用いて取り出す
+#リストの要素をインデックスを用いて取り出す。(インデックスで要素にアクセスできる=シーケンス型)
 zero = x[0]
 one = x[1]
 nine = x[-1]
@@ -289,5 +293,116 @@ int main() {
 	}
 }
 """
+###############################################
+#タプル
+###############################################
+#リストと似ているが、要素の変更ができない。
+
+#タプルの宣言
+my_tuple1 = (1,2)
+my_tuple2 = 3, 4
+my_list = [1, 2, 3]
+my_list2 = [4, 5, 6]
+list_tuple = my_list, my_list2
+
+#空のタプルを生成
+empty_tuple = ()
+
+#一要素のみのタプル。コンマを忘れずにつける。
+one_tuple = ("only,")
+one_tuple = "only",
+
+#型の確認(<class 'tuple'>)
+print(type(one_tuple))
+
+#タプルを用いて複数の値を返す関数
+def sum_and_product(x,y):
+	return (x + y), (x * y)
+sp = sum_and_product(2,3)	#sp = (5, 6)
+s, p = sum_and_product(4, 8)	#s = 12, p = 32
+
+#値の交換
+s, p = p, s
+
+#タプル関数を用いてタプルを生成
+emptytuple = tuple()  #空のタプルを作成
+mylist = [0, 1, 2, 3] 
+mytuple = tuple(mylist)  #リストを基にタプルを作成
+anothertuple = tuple(iter(mylist))  #イテレータを基にタプルを作成(イテレータについては後述)
+
+#インデックスでタプルの要素にアクセス
+tp1 = mytuple[1]
+print(mytuple[2])
+
+#要素の変更はできないが、変数に別のタプルを代入可能
+mytuple = 1, 2, 3
+mytuple = 4, 5, 6
+list_tuple[0][1] = 20
+
+###############################################
+#辞書
+###############################################
+#キーと値を関連付けて格納する。キーに対する値を即座に取り出せる。
+
+#空の辞書
+empty_dict = {}
+empyt_dict2 = dict()
+
+#辞書のリテラル表現
+test_score = {"A": 80, "B": 65}
+
+#キーに対する値を取り出す。
+A_score = test_score["A"]
+
+#辞書内にキーが存在するか
+exsistence_A = "A" in test_score #True
+exsistence_B = "C" in test_score #False
+
+#getメソッドを用いて、キーなしのときデフォルト値を返す
+C_score = test_score.get("C", 0)	#0になる
+D_score = test_score.get("D")       #Noneになる
+
+#キーの値を書き換える
+test_score["A"] = 100
+
+
+profile = {
+	"name" : "Tom",
+	"age" : 19,
+	"height" : 170,
+	"weight" : 60,
+	"Univ" : "Okayama",
+	"Country" : "Japan",
+	"food" : ["Apple", "Banana", "Orange", "Grape"]
+}
+
+#各要素のキーを取得
+profile_keys = profile.keys()
+print(profile_keys)	#dict_keys(['name', 'age', 'height', 'weight', 'Univ', 'Country', 'food'])
+
+#各要素の値を取得
+profile_values = profile.values()
+print(profile_values)	#dict_values(['Tom', 19, 170, 60, 'Okayama', 'Japan', ['Apple', 'Banana', 'Orange', 'Grape']])
+
+#各要素のタプルを取得
+profile_items = profile.items()
+print(profile_items)	#dict_items([('name', 'Tom'), ('age', 19), ('height', 170), ('weight', 60), ('Univ', 'Okayama'), ('Country', 'Japan'), ('food', ['Apple', 'Banana', 'Orange', 'Grape'])])
+
+#辞書内にキーがあるキーが含まれているか確認
+"name" in profile_keys	#python的でない
+"name" in profile	#python的
+
+#辞書内にある値が含まれているか確認
+"Tom" in profile_values	#唯一の方法だが低速
+
+#文章中の単語数を辞書に登録する
+document = ["Hello", "Hello", "Yes", "Yes", "Good", "Bye", "Hello"]
+word_counts = {}
+for word in document:
+	if word in word_counts:		#すでに辞書内に登録されていれば、値を+1する
+		word_counts[word] += 1
+	else:
+		word_counts[word] = 1		#辞書内に登録されていなければ、値を1とする
+print(word_counts)	#{'Hello': 3, 'Yes': 2, 'Good': 1, 'Bye': 1}
 
 
