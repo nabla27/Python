@@ -28,12 +28,27 @@ while tmp_num < deg:
     tmp_num += 1
 print(" + ", conf[0])
 
+print("How many times do you differentiate?")
+num_dif = int(input())
+tmp_num = 0
+reconf = []
+n = 0
+if num_dif == 0:
+    reconf = conf[:]
+while n < num_dif:
+    while tmp_num < deg:
+        reconf.append(1)
+        reconf[tmp_num] = (tmp_num + 1) * conf[tmp_num + 1]
+        tmp_num += 1
+    deg -= 1
+    n += 1
+
 x = np.linspace(-5, 5, 50)
 def func(var):
     tmp_num = 0
     val = 0
     while tmp_num <= deg:
-        val += conf[tmp_num] * var ** tmp_num
+        val += reconf[tmp_num] * var ** tmp_num
         tmp_num += 1
     return val
 
