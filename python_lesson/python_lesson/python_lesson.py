@@ -451,6 +451,7 @@ tf = 4 in primes	#tf=False
 numlist = [1, 3, 5, 6, 6, 4, 3, 3, 1, 1, 7, 4, 3, 3, 2, 2, 3]
 num_set = set(numlist)	#重複が取り除かれる
 print(num_set)	#{1, 2, 3, 4, 5, 6, 7}
+num_list = list(num_set)	#重複のないリストを生成
 
 
 
