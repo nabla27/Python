@@ -497,7 +497,7 @@ print()
 #continueとbreak文
 for x in range(10):
 	if x == 1 or x == 5:
-		continue
+		continue	#ループの先頭に戻る
 	elif x == 7:
 		break
 	print(x, end=', ')	#0, 2, 3, 4, 6,
