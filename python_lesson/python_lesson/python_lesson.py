@@ -405,4 +405,54 @@ for word in document:
 		word_counts[word] = 1		#辞書内に登録されていなければ、値を1とする
 print(word_counts)	#{'Hello': 3, 'Yes': 2, 'Good': 1, 'Bye': 1}
 
+#defaultdictクラスを用いる
+#デフォルトの値を設定できる辞書型リスト。辞書に登録されていなくてもその時点でその値をデフォルト(初期値)として認知する。
+#登録されていないキーにアクセスした場合にもエラーにならない。
+from collections import defaultdict
+word_count_a = defaultdict(int)		#defaultdict()で引数で渡した関数が返す値を初期値とする。この場合は0
+for word in document:
+	word_count_a[word] += 1
+print(word_count_a)		#defaultdict(<class 'int'>, {'Hello': 3, 'Yes': 2, 'Good': 1, 'Bye': 1})
+#空のリストを初期値とする
+dict_list = defaultdict(list)
+dict_list[2].append(1)
+print(dict_list)	#defaultdict(<class 'list'>, {2: [1]})
+#空の辞書を初期値とする
+dict_list = defaultdict(dict)
+dict_list["math"]["NumberTheory"] = "ok"
+print(dict_list)	#defaultdict(<class 'dict'>, {'math': {'NumberTheory': 'ok'}})
+#無名関数lambdaを用いて初期値を1とする(各keyが1多くカウントされる)
+word_count_b = defaultdict(lambda:1)
+for word in document:
+	word_count_b[word] += 1
+print(word_count_b)		#defaultdict(<function <lambda> at 0x000001BFB22F9940>, {'Hello': 4, 'Yes': 3, 'Good': 2, 'Bye': 2})
+
+#Counterクラスを用いる
+#ひとつづきの値をキーとその出現数に展開する
+numlist = [1, 3, 5, 6, 6, 4, 3, 3, 1, 1, 7, 4, 3, 3, 2, 2, 3]
+from collections import Counter
+c = Counter(numlist)
+print(c)	#Counter({3: 6, 1: 3, 6: 2, 4: 2, 2: 2, 5: 1, 7: 1})
+c = Counter(document)
+print(c)	#Counter({'Hello': 3, 'Yes': 2, 'Good': 1, 'Bye': 1})
+
+###############################################
+#集合
+###############################################
+#重複しない値の集まり
+primes = {2, 3, 5, 7}	#中括弧で集合の宣言
+primes = set()	#空の集合
+primes.add(2)	#要素2を追加 {2}
+primes.add(3)	#要素3を追加 {2, 3}
+primes.add(3)	#{2, 3}のまま
+n = len(primes)		#n=2
+tf = 2 in primes	#tf=True 
+tf = 4 in primes	#tf=False
+numlist = [1, 3, 5, 6, 6, 4, 3, 3, 1, 1, 7, 4, 3, 3, 2, 2, 3]
+num_set = set(numlist)	#重複が取り除かれる
+print(num_set)	#{1, 2, 3, 4, 5, 6, 7}
+
+
+
+
 
