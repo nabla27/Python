@@ -559,3 +559,24 @@ tf = all([])	#False要素が存在しないのでtf=True
 tf = any([False, 0, "ok"])	#tf=True
 tf = any([False, 0, []])	#tf=False
 tf = any([])	#True要素が存在しないのでtf=False
+
+###############################################
+#ソート
+###############################################
+#リストをソートするsortメソッド
+list = [1, 5, 3, 8, 3, 2, 3]
+list.sort()		#list=[1, 2, 3, 3, 3, 5, 8]
+
+#既存のリストを書き換えず、新たにソートしたリストを生成
+list = [1, 3, 7, 2, 4, 6, 1]
+list_sort = sorted(list)
+print(list_sort)	#[1, 1, 2, 3, 4, 6, 7]
+
+#revreseパラメータで降順で並び替える
+list_sort = sorted(list, reverse=True)
+print(list_sort)	#[7, 6, 4, 3, 2, 1, 1]
+
+#key引数に指定した関数の結果を使ってソートする
+list = [-5, -3, 1, 6, 2, -2]
+list_sort = sorted(list, key=abs)
+print(list_sort)	#[1, 2, -2, -3, -5, 6]
