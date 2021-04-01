@@ -453,6 +453,57 @@ num_set = set(numlist)	#重複が取り除かれる
 print(num_set)	#{1, 2, 3, 4, 5, 6, 7}
 num_list = list(num_set)	#重複のないリストを生成
 
+###############################################
+#真偽とループ
+###############################################
+#ifによる真偽
+if 2 > 1:
+	print("2が1より大きい")		#実行される
+elif 3 > 2:
+	print("3が2より大きい")		#実行されない
+if 1 > 2:
+	print("1が2より大きい")		#実行されない
+elif 3 > 2:
+	print("3が2より大きい")		#実行される
+else:
+	print("その他の処理")		#実行されない
+
+#一行でif-elif-elseを処理
+x = 2
+sol = "even" if x % 2 == 0 else "odd"	#xの余りが0ならsol=even,その他はsol=even
+x = 0
+sol = 'negative' if x < 0 else 'positive' if x > 0 else 'zero'	#x<0ならnegative.それ以外でx>0ならpositive.それ以外ならzero
+print(sol)	#zero
+
+#while文
+x = 0
+while x < 10:
+	print(x, end=', ')	#0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+	x += 1
+print()
+
+#while文で無限ループ
+x = 0
+while True:
+	key = input()	#キーボード入力待機
+	if key == "exit":	#exitと入力されたらbreakでループを抜け出す
+		break	
+
+#for文
+for x in range(10):		#0から9の範囲
+	print(x, end=', ')	#0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+print()
+
+#continueとbreak文
+for x in range(10):
+	if x == 1 or x == 5:
+		continue
+	elif x == 7:
+		break
+	print(x, end=', ')	#0, 2, 3, 4, 6,
+print()
+
+
 
 
 
