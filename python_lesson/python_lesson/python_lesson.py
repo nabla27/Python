@@ -503,8 +503,59 @@ for x in range(10):
 	print(x, end=', ')	#0, 2, 3, 4, 6,
 print()
 
+###############################################
+#真偽
+###############################################
+ft = 1 == 2		#tf = False
+tf = 1 < 2		#tf = True
+tf = 1 > 2		#tf = False
+tf = True == False		#tf = False
 
+#空のリストはFalseを返す。空の辞書や空文字、空集合(set())などもFalse
+list = []
+if list:
+	print("True")	#実行されない
+else:
+	print("False")	#実行される
+list.append(2)
+if list:
+	print("True")	#実行される
+else:
+	print("False")	#実行されない
 
+#0と0.0もFalseを返す
+x = 0
+y = 0.0
+if x:
+	print("True")	#実行されない
+if y:
+	print("True")	#実行されない
+x = 2
+if x:
+	print("True")	#実行される
 
+#and演算子
+#1つ目の値がTrueなら2つ目の値となる。一つ目の値がFalseならそのままFalseを返す
+x = 0
+value = x and 2		#x=0
+x = 3
+value = x and 2		#x=2
 
+#or演算子
+#1つ目の値がFalseなら2つ目の値となる。1つ目の値がTrueならそのままTrueを返す
+x = 0
+value = x or 2		#x=2
+x = 3
+value = x or 2		#x=3
 
+#all関数
+#要素がすべてTrueならTrueを返す
+tf = all([True, 1, "ok"])	#tf=True
+tf = all([True, 0, "yes"])	#tf=False
+tf = all([])	#False要素が存在しないのでtf=True
+
+#any関数
+#要素のいづれかがTrueならTrueを返す
+tf = any([False, 0, "ok"])	#tf=True
+tf = any([False, 0, []])	#tf=False
+tf = any([])	#True要素が存在しないのでtf=False
