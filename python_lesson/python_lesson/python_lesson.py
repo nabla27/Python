@@ -580,3 +580,26 @@ print(list_sort)	#[7, 6, 4, 3, 2, 1, 1]
 list = [-5, -3, 1, 6, 2, -2]
 list_sort = sorted(list, key=abs)
 print(list_sort)	#[1, 2, -2, -3, -5, 6]
+
+###############################################
+#リスト内包表記
+###############################################
+
+even_number = [ x for x in range(5) if x % 2 == 0]	#[0, 2, 4]
+squars = [ x * x for x in range(5)]	#[0, 1, 4, 9, 16]
+even_squars =  [ x * x for x in even_number]	#[0, 4, 16]
+
+square_dict = {x: x * x for x in range(5)}	#{0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+square_set = {x * x for x in [-1, 1]}	#{1}
+
+#値を省略したいとき、アンダーバーで代用
+zero_list = [0 for _ in range(5)]	#[0, 0, 0, 0, 0]
+
+#複数forの使用
+pairs = [(x,y)
+		 for x in range(3)
+		 for y in range(3)]		#[(0, 0), (0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1), (2, 2)]
+
+pairs = [(x,y)
+		 for x in range(3)
+		 for y in range(x + 1, 3)]	#[(0, 1), (0, 2), (1, 2)]
