@@ -1,6 +1,6 @@
 #pythonの基本文法
 #対応するC言語での記述はクオーテーション内で記述
-#Cでは、プログラムの本体は一番先に処理されるmain関数内に書く必要があるが、以下では省略する。
+#Cでは、プログラムの本体は一番先に処理されるmain関数内に書く必要があるが、以下では省略
 
 
 ###############################################
@@ -30,7 +30,7 @@ using namespace std;
 #関数の定義
 ###############################################
 
-#"def <関数名>:"で宣言。"return"で値を返す
+# "def <関数名>:" で宣言。 "return" で値を返す
 def double(x):	
 	return x * 2
 
@@ -603,3 +603,16 @@ pairs = [(x,y)
 pairs = [(x,y)
 		 for x in range(3)
 		 for y in range(x + 1, 3)]	#[(0, 1), (0, 2), (1, 2)]
+
+###############################################
+#自動テストとアサート
+###############################################
+x = 3
+y = 2
+assert x + y == 5	#x + y の値が5でない場合、AssertionErrorが発生する。
+assert x + y == 5, 'x + y の値が4ではありません。'	#x + y の値が4でない場合、AssertionErrorとともにエラーメッセージを指定する。
+
+def largest_num(list):
+	return max(list)
+assert largest_num([2, 5, 7, 9]) == 9	#引数で渡したリストの最大値が9でなければAssertionError
+assert largest_num([2])		#空でなくFalseでないので、AssertionErrorは起きない。引数を渡さなければAssertionError 
